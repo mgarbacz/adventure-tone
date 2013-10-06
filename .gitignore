@@ -1,0 +1,6 @@
+# Vim swap files
+*.swp
+# OSX file store
+.DS_Store
+# Examples
+demo
