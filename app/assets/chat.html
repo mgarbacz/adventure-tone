@@ -40,7 +40,7 @@
     <div id="chat-box"></div>
     <input id="chat-input" type="text">
   </div>
-  <script src="//108.195.24.44:8888/socket.io/socket.io.js"></script>
+  <script src="//localhost:8888/socket.io/socket.io.js"></script>
   <script>
   var user = document.getElementById('name-input');
   user.value = localStorage.getItem('username');
@@ -55,7 +55,7 @@
     localStorage.setItem('usercolor', color.value);
   }
 
-  var socket = io.connect('//108.195.24.44:8888');
+  var socket = io.connect('//localhost:8888/chat');
   socket.on('connect', function (data) {
     console.log(data);
     socket.emit('message', { message: 'A user has connected! ' + user.value});
