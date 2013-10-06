@@ -2,7 +2,11 @@
 *.swp
 # OSX file store
 .DS_Store
-# Examples
-demo
 # NPM packages
 node_modules
+
+# Generated app
+public
+
+# Examples
+demo
