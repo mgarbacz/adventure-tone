@@ -10,3 +10,7 @@ adventure-tone
     The fun will never
     end, It's Adventure
     Tone!
+
+License
+-------
+[MIT License](LICENSE)
