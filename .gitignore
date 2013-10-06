@@ -4,3 +4,5 @@
 .DS_Store
 # Examples
 demo
+# NPM packages
+node_modules
