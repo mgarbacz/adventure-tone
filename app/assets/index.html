@@ -2,15 +2,84 @@
 <html lang="en">
 <head>
   <title>Adventure Tone</title>
+  <style>
+    html, body {
+      width: 100%;
+    }
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #333333;
+      background-color: #44bb44;
+    }
+    .username {
+      font-weight: bold;
+    }
+    #container {
+      width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fafafa;
+    }
+    #chat-box {
+      height: 500px;
+      overflow: scroll;
+    }
+    #chat-box * {
+      max-width: 100%;
+    }
+    #chat-input {
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
-  <script src="//localhost:8888/socket.io/socket.io.js"></script>
+  <div id="container">
+    <input id="name-input" type="text" placeholder="Pick Username">
+    <input id="name-color" type="text" placeholder="Pick name color">
+    <div id="chat-box"></div>
+    <input id="chat-input" type="text">
+  </div>
+  <script src="//108.195.24.44:8888/socket.io/socket.io.js"></script>
   <script>
-  var socket = io.connect('//localhost:8888');
-  socket.on('news', function (data) {
+  var user = document.getElementById('name-input');
+  user.value = localStorage.getItem('username');
+  user.onchange = function(e) {
+    console.log("Stored username: " + user.value);
+    localStorage.setItem('username', user.value);
+  }
+  var color = document.getElementById('name-color');
+  color.value = localStorage.getItem('usercolor');
+  color.onchange = function(e) {
+    console.log("Stored usercolor: " + color.value);
+    localStorage.setItem('usercolor', color.value);
+  }
+
+  var socket = io.connect('//108.195.24.44:8888');
+  socket.on('connect', function (data) {
     console.log(data);
-    socket.emit('message', { message: 'Hello server!' });
+    socket.emit('message', { message: 'A user has connected! ' + user.value});
   });
+  socket.on('message', function(data) {
+    console.log(data);
+    var chat_box = document.getElementById('chat-box');
+    var chat_message = document.createElement('p');
+    chat_message.innerHTML = data.message;
+
+    chat_box.appendChild(chat_message);
+    chat_box.scrollTop = chat_box.scrollHeight;
+  });
+
+  var chat_input = document.getElementById('chat-input');
+  chat_input.onkeypress = function(e) {
+    if (e.keyCode == '13' ) {
+      var output = '<span class="username" style="color:' + color.value + '">'
+                   + user.value + "</span>: " + this.value;
+
+      socket.emit('message', { message: output });
+      this.value = '';
+    }
+  };
 </script>
 </body>
 </html>
