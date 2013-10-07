@@ -47,6 +47,7 @@
     user.onchange = function(e) {
       console.log("Stored username: " + user.value);
       localStorage.setItem('username', user.value);
+      socket.emit('change username', user.value);
     }
     var color = document.getElementById('name-color');
     color.value = localStorage.getItem('usercolor');
@@ -57,7 +58,7 @@
 
     var socket = io.connect('//localhost:8888/chat');
     socket.on('connect', function () {
-      socket.emit('message', { message: 'A user has connected! ' + user.value});
+      socket.emit('set username', user.value);
     });
     socket.on('message', function(data) {
       console.log(data);
