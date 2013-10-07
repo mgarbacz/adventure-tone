@@ -2,7 +2,7 @@ var io = require('socket.io').listen(8888);
 
 var chat = io.of('/chat').on('connection', function(socket) {
 
-  socket.on('message', function() {
+  socket.on('message', function(data) {
     chat.emit('message', { message: data.message });
   });
 
