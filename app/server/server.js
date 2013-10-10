@@ -11,15 +11,15 @@ var tones = io.of('/tones').on('connection', function(socket) {
 
 var chat = io.of('/chat').on('connection', function(socket) {
 
-  // Set the default usename to socket's id
-  socket.set('username', socket.id);
-
   // Set the username on request from client and announce connection
   socket.on('set username', function(username) {
     if (username != '') {
       socket.set('username', username, function() {
         socket.emit('username ready');
       });
+    } else {
+      // Set the default username to socket's id
+      socket.set('username', socket.id);
     }
     socket.get('username', function(err, name) {
       if (!err)
