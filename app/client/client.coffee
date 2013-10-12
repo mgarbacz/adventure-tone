@@ -9,16 +9,21 @@ for row in [0..15]
     grid_row.appendChild grid_box
   grid.appendChild grid_row
 
-grid.addEventListener 'click', (e) ->
-  console.log(e.toElement.id)
-  target = document.getElementById e.toElement.id
+toggleGrid = (target_id) ->
+  target = document.getElementById target_id
   if target.className is 'grid-box'
     target.className = 'grid-box clicked'
   else target.className = 'grid-box'
 
-socket = io.connect '//localhost:8888/tones'
+grid.addEventListener 'click', (e) ->
+  socket.emit 'grid click', { element: e.toElement.id }
+  toggleGrid e.toElement.id
+
+socket = io.connect '//71.229.75.163:8888/tones'
 
 socket.on 'connect', ->
   socket.on 'greeting', (data) ->
     console.log data
   socket.emit 'greeting', { greeting: 'Hi server!' }
+  socket.on 'grid click', (data) ->
+    toggleGrid data.element

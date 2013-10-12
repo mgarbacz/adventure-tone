@@ -6,6 +6,10 @@ tones = io.of('/tones').on 'connection', (socket) ->
     console.log data
     socket.emit 'greeting', { greeting: 'Hello client!' }
 
+  socket.on 'grid click', (data) ->
+    console.log data
+    socket.broadcast.emit 'grid click', { element: data.element }
+
 
 chat = io.of('/chat').on 'connection', (socket) ->
 
