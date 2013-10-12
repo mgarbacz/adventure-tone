@@ -19,7 +19,7 @@ grid.addEventListener 'click', (e) ->
   socket.emit 'grid click', { element: e.toElement.id }
   toggleGrid e.toElement.id
 
-socket = io.connect '//71.229.75.163:8888/tones'
+socket = io.connect '//localhost:8888/tones'
 
 socket.on 'connect', ->
   socket.on 'greeting', (data) ->
