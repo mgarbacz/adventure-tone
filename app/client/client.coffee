@@ -33,6 +33,10 @@ socket.on 'connect', ->
     console.log data
   socket.emit 'greeting', { greeting: 'Hi server!' }
 
+  # Sync to current grid state
+  socket.on 'grid status', (data) ->
+    toggleGrid element for element in data.elements
+
   # Event for grid clicks from other clients
   socket.on 'grid click', (data) ->
     toggleGrid data.element

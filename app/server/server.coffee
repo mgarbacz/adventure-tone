@@ -1,13 +1,18 @@
 io = require('socket.io').listen 8888
 
+elements = []
+
 tones = io.of('/tones').on 'connection', (socket) ->
 
   socket.on 'greeting', (data) ->
     console.log data
     socket.emit 'greeting', { greeting: 'Hello client!' }
 
+  socket.emit 'grid status', { elements: elements }
+
   socket.on 'grid click', (data) ->
     console.log data
+    elements.push data.element
     socket.broadcast.emit 'grid click', { element: data.element }
 
 
