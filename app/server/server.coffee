@@ -1,7 +1,7 @@
 io = require('socket.io').listen 8888
 
-# Store history of element ids clicked in order clicked on
-elements = []
+# Store history of clicks in order of elements clicked on
+clicks = []
 
 tones = io.of('/tones').on 'connection', (socket) ->
 
@@ -11,11 +11,13 @@ tones = io.of('/tones').on 'connection', (socket) ->
     socket.emit 'greeting', { greeting: 'Hello client!' }
 
   # Get new client up to date with current grid state
-  socket.emit 'grid status', { elements: elements }
+  socket.emit 'grid status', { clicks: clicks }
 
   # Take grid click events and broadcast to all other clients
   socket.on 'grid click', (data) ->
     console.log data
     # Store element clicked for syncing new clients
-    elements.push data.element
-    socket.broadcast.emit 'grid click', { element: data.element }
+    clicks.push data
+    socket.broadcast.emit 'grid click',
+      # TODO - fix sender to identify sender
+      { element: data.element, sender: data.sender }

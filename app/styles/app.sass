@@ -3,6 +3,9 @@
 $background-color: #fafafa
 $foreground-color: #333333
 
+$complementary-color-1: #22995e
+$complementary-color-2: adjust-hue($complementary-color-1, 180deg)
+
 html, body
   height: 100%
 
@@ -29,5 +32,7 @@ body
   border: 1px solid $background-color
   float: left
 
-.grid-box.clicked
-  background-color: $background-color
+.grid-box.other-clicked
+  background-color: $complementary-color-2
+.grid-box.client-clicked
+  background-color: $complementary-color-1
