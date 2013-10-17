@@ -1,4 +1,5 @@
-io = require('socket.io').listen process.env.PORT || 8888
+app = require('http').createServer()
+io = require('socket.io').listen app
 
 # Store history of clicks in order of elements clicked on
 clicks = []
@@ -21,3 +22,5 @@ tones = io.of('/tones').on 'connection', (socket) ->
     socket.broadcast.emit 'grid click',
       # TODO - fix sender to identify sender
       { element: data.element, sender: data.sender }
+
+app.listen process.env.PORT || 8888
