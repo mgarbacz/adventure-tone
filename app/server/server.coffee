@@ -1,4 +1,4 @@
-io = require('socket.io').listen 8888
+io = require('socket.io').listen process.env.PORT || 8888
 
 # Store history of clicks in order of elements clicked on
 clicks = []
