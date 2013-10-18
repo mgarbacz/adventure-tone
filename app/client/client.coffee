@@ -1,3 +1,6 @@
+# Import config for socket
+config = require 'client/config'
+
 # Build the contents of grid - 16x16
 grid = document.getElementById 'grid'
 # Need 16 rows of boxes
@@ -41,7 +44,7 @@ grid.addEventListener 'click', (e) ->
   socket.emit 'grid click', { element: e.toElement.id, sender: 'other' }
   toggleGrid e.toElement.id, 'client'
 
-socket = io.connect '//localhost:8888/tones'
+socket = io.connect '//' + config.socket + '/tones'
 
 socket.on 'connect', ->
 
