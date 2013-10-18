@@ -1,5 +1,5 @@
 # Import config for socket
-config = require 'client/config'
+config = require 'config'
 
 # Build the contents of grid - 16x16
 grid = document.getElementById 'grid'
