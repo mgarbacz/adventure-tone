@@ -1,6 +1,10 @@
 # Import config for socket
 config = require 'config'
 
+# Remove loading gif, loaded at this point
+loading_gif = document.getElementById 'grid-loading'
+loading_gif.parentNode.removeChild loading_gif
+
 # Build the contents of grid - 16x16
 grid = document.getElementById 'grid'
 # Need 16 rows of boxes
