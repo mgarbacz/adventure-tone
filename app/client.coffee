@@ -43,6 +43,10 @@ toggleGrid = (target_id, sender) ->
     else
       target.className = 'grid-box other-clicked'
 
+toggleConnectionStatus = (display) ->
+  conn_status = document.getElementById 'conn-status'
+  conn_status.style.display = display
+
 # Clicking on a box triggers a socket event and visual feedback
 grid.addEventListener 'click', (e) ->
   socket.emit 'grid click', { element: e.toElement.id, sender: 'other' }
@@ -51,6 +55,8 @@ grid.addEventListener 'click', (e) ->
 socket = io.connect '//' + config.socket + '/tones'
 
 socket.on 'connect', ->
+
+  toggleConnectionStatus 'none'
 
   # TODO - refactor into useful connection event
   socket.on 'greeting', (data) ->
@@ -64,3 +70,7 @@ socket.on 'connect', ->
   # Event for grid clicks from other clients
   socket.on 'grid click', (data) ->
     toggleGrid data.element, data.sender
+
+  # Let the client know if socket disconnect
+  socket.on 'disconnect', () ->
+    toggleConnectionStatus 'block'
