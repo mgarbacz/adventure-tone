@@ -45,7 +45,7 @@ toggleGrid = (target_id, sender) ->
 
 toggleConnectionStatus = (display) ->
   conn_status = document.getElementById 'conn-status'
-  conn_status.style.display = display
+  conn_status.innerHTML = display
 
 # Clicking on a box triggers a socket event and visual feedback
 grid.addEventListener 'click', (e) ->
@@ -56,7 +56,7 @@ socket = io.connect '//' + config.socket + '/tones'
 
 socket.on 'connect', ->
 
-  toggleConnectionStatus 'none'
+  toggleConnectionStatus '<span class="success">Server Connected</span>'
 
   # TODO - refactor into useful connection event
   socket.on 'greeting', (data) ->
@@ -73,4 +73,4 @@ socket.on 'connect', ->
 
   # Let the client know if socket disconnect
   socket.on 'disconnect', () ->
-    toggleConnectionStatus 'block'
+    toggleConnectionStatus '<span class="warning">Server Disconnected</span>'

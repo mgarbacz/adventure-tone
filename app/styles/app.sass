@@ -6,6 +6,8 @@ $foreground-color: #333333
 $complementary-color-1: #22995e
 $complementary-color-2: adjust-hue($complementary-color-1, 180deg)
 
+$grid-size: 480px
+
 html, body
   height: 100%
 
@@ -22,7 +24,7 @@ body
   box-sizing: border-box
 
 .container
-  width: 480px
+  width: $grid-size
   margin: 0 auto
 
 .grid-box
@@ -37,9 +39,33 @@ body
 .grid-box.client-clicked
   background-color: $complementary-color-1
 
+#grid
+  height: $grid-size
+  width: $grid-size
+
 #grid-loading
   display: block
   margin: 50px auto
 
 #conn-status
   text-align: center
+
+span.success,
+span.warning
+  display: block
+  width: 100%
+  padding: 15px
+  margin-bottom: 20px
+  border: 1px solid rgba(0, 0, 0, 0)
+  border-radius: 4px
+
+span.success
+  color: #468847
+  background-color: #DFF0D8
+  border-color: #D6E9C6
+
+span.warning
+  color: #C09853
+  background-color: #FCF8E3
+  border-color: #FBEED5
+
