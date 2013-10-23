@@ -1,5 +1,5 @@
 {
-  "name": "adventure-tone-build",
+  "name": "adventure-tone",
   "description": "A shared musical adventure in the browser",
   "version": "0.0.1",
   "dependencies": {
