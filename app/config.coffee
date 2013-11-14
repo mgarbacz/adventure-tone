@@ -1,7 +1,7 @@
 env = switch window.location.hostname
   when "localhost", "127.0.0.1"
     "development"
-  when "adventure-tone.michgarbacz.com"
+  when "adventure-tone.michalgarbacz.com"
     "production"
 
 config =
