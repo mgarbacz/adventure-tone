@@ -11,7 +11,7 @@ adventure-tone
     end, It's Adventure
     Tone!
     
-Try the [demo](http://adventure-tone.michgarbacz.com)!
+Try the [demo](http://adventure-tone.michalgarbacz.com)!
 
 Check out the backend [source code](https://github.com/mgarbacz/adventure-tone-socket).
 
